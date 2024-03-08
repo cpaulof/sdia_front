@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// App.tsx or App.jsx
+import {BrowserRouter, useNavigate, Route, Routes, Link} from 'react-router-dom';
+import {NextUIProvider} from '@nextui-org/react';
+import Home from './pages/home';
+import Layout from './pages/layout';
 
 function App() {
+  const navigate = useNavigate();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NextUIProvider navigate={navigate}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index  element={<Home />} />
+          <Route path="/help" element={<div><a>Help</a></div>} />
+        </Route>
+      </Routes>
+    </NextUIProvider>
   );
 }
 
