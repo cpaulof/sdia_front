@@ -31,9 +31,9 @@ function FaceDetection() {
     
   return (
     <>
-        <div class="grid grid-cols-2 items-end gap-2">
+        <div className="grid grid-cols-2 items-end gap-2">
             <div className=''>
-                <Image src_="http://127.0.0.1:5000/video_feed" width="740" src={drone_view}/>
+                <Image src="http://127.0.0.1:5000/video_feed" width="740" src_={drone_view}/>
             </div>
             
 
