@@ -96,7 +96,7 @@ function Layout({children,}){
                 
                 <div className="flex flex-col">
                 <MyNavBar />
-                    <main className="container mx-auto pt-10  px-2 flex-grow  shadow-small dddd">
+                    <main className="container mx-auto pt-10  px-2 flex-grow  ">
                         
                         <Outlet />
                     </main>

@@ -1,8 +1,6 @@
 import { Button, Divider, Image, Card, Table, TableHeader, TableColumn, TableBody, TableCell, TableRow } from '@nextui-org/react';
-import { Link } from 'react-router-dom';
 
 import drone_view from "../assets/default_drone_view.png"
-import default_map from "../assets/default_map.png"
 
 import MapView from "../components/map_view"
 import { useEffect, useState } from 'react';
@@ -14,6 +12,11 @@ function FaceDetection() {
     const [pos, setPos] = useState({lat:-2.53697577046641, lng:-44.2792379196194})
     const [droneData, setDroneData] = useState(null)
     
+    useEffect(()=>{
+        fetch("http://127.0.0.1:5000/face_detection", { mode: 'cors'}).then(async (r)=>{
+            
+        }).catch(err=>{console.log(err)})
+      }, [])
 
     useEffect(()=>{
         setTimeout(()=>{

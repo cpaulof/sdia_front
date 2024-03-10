@@ -5,9 +5,6 @@ import MapView from '../components/map_view';
 import { useEffect, useMemo, useState } from 'react';
 
 import no_avatar from "../assets/no_avatar.png"
-import play_icon from "../assets/play-icon.svg"
-import pause_icon from "../assets/pause-icon.svg"
-import stop_icon from "../assets/stop-icon.svg"
 import { PlayIcon } from '../assets/play';
 import { PauseIcon } from '../assets/pause';
 import { StopIcon } from '../assets/stop';
