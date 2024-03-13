@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-import drone_marker from "../assets/drone_marker.png"
+import drone_marker from "../assets/drone_mark.svg"
+import drone_marker2 from "../assets/drone.png"
+
+import {DroneIcon} from "../assets/drone"
+import pause_icon from "../assets/pause-icon.svg"
 
 import * as Keys from '../keys'
 
@@ -20,27 +24,41 @@ const center = {
   lng: -44.2792379196194
 };
 
-function MapView({pos, size}) {
+function MapView({pos, size, markYaw}) {
   const [position, setPosition] = useState({lat:-2.53697577046641, lng:-44.2792379196194});
   const [marker, setMarker] = useState(null)
+  const [markRotation, setMarkRotation] = useState(0)
   
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: Keys.GOOGLE_MAPS_API_KEY
   })
   
+  useEffect(()=>{
+    if(marker!=null){
+      marker.setIcon({path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW, rotation:markYaw, scale:5, anchor: new window.google.maps.Point(0, 3)})
+    }
+  }, [markYaw])
 
   useEffect(()=>{
     setPosition(pos)
     if(map!=null) {
       map.setCenter(position)
       if(marker == null){
-      
-      setMarker(new window.google.maps.Marker({
+      let _mark = new window.google.maps.Marker({
         position: position,
+        optimized: false,
+        
         map,
-        icon: drone_marker,
-        title: "teste"}))
+        icon: {
+          path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+          scale:5,
+          anchor: new window.google.maps.Point(0, 3)
+        },
+        title: "teste"})
+      setMarker(_mark)
+      //_mark.setAnimation(window.google.maps.Animation.BOUNCE)
+      
       }
       if(marker!=null) marker.setPosition(position)
     }

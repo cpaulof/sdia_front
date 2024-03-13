@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 function FaceDetection() {
     //let map = < MapView  />;
     const [pos, setPos] = useState({lat:-2.53697577046641, lng:-44.2792379196194})
+    const [markYaw, setMarkYaw] = useState(0)
     const [droneData, setDroneData] = useState(null)
     
     useEffect(()=>{
@@ -24,9 +25,10 @@ function FaceDetection() {
                     setDroneData(await r.json());
                     if(droneData!=null){
                         setPos({lat:droneData.lat, lng:droneData.lng})
+                        setMarkYaw(droneData.yaw)
                     }
                 }).catch(err=>{console.log(err)})          
-        }, 500)
+        }, 150)
     }, [droneData])
     
   return (
@@ -115,7 +117,7 @@ function FaceDetection() {
     <Divider className='mt-5' />
     <div className='grid grid-cols-2 pt-10 gap-2' >        
         <div className='map-center '>
-                    <MapView  pos={pos}/>
+                    <MapView  pos={pos} markYaw={markYaw}/>
         </div> 
         
             <div className='hidden' >
@@ -123,7 +125,7 @@ function FaceDetection() {
            
                 <Button >Btn1</Button>
            
-                <Button onClick={()=>{setPos({lat:pos.lat+0.00001, lng: pos.lng})}}>mudar mapa</Button>
+                <Button onClick={()=>{setPos({lat:pos.lat+0.0000, lng: pos.lng}); setMarkYaw(markYaw+5)}}>mudar mapa</Button>
             </div>
         
     </div>
